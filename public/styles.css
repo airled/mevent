@@ -1,0 +1,20 @@
+.concert{
+	display: block;
+	width: 100%;
+}
+.pic{
+	width: 24%;
+	display: inline-block;
+}
+.name{
+	width: 24%;
+	display: inline-block;
+}
+.place{
+	width: 24%;
+	display: inline-block;
+}
+.date{
+	width: 24%;
+	display: inline-block;
+}
