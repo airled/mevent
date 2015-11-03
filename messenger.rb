@@ -7,7 +7,7 @@ class Messenger
     Nokogiri::HTML(Curl.get(url).body)
   end
 
-  def send_message
+  def send_message(text, number)
 
     html = get_html('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send&isFree=1').text
     File.open('1.html', 'w') { |f| f << html }
@@ -28,9 +28,9 @@ class Messenger
 #         'isFree' => '1',
 #         'MMObjectID' => '',
 #         'Prefix' => '375',
-#         'To' => '375292771723',
+#         'To' => '37529' + number,
 #         'NDC' => '29',
-#         'mobnum' => '2771723',
+#         'mobnum' => number,
 #         'Msg' => 'тест',
 #         'count' => count,
 #         'Day' => '25',
