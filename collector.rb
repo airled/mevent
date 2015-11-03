@@ -4,10 +4,10 @@ require_relative './init/models'
 
 class Collector
 
-  def self.run
+  def run
     current_page = source + '/jnp/music/index.html'
     while (current_page != source) do
-      html = Nokogiri::HTML(Curl.get(current_page).body)
+      html = get_html(current_page)
       p current_page
       html.xpath('//div[@class="eventInfo"]').map do |event|
         name = event.xpath('.//h3').text.strip
@@ -18,6 +18,10 @@ class Collector
       end
       current_page = source + html.xpath('//a[@class="normal"]/@href').text
     end
+  end
+
+  def get_html(url)
+    Nokogiri::HTML(Curl.get(url).body)
   end
 
 end
