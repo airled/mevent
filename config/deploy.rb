@@ -1,5 +1,4 @@
 require 'mina/bundler'
-require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'
 
@@ -17,14 +16,11 @@ end
 task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/log"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/log"]
-
   queue! %[mkdir -p "#{deploy_to}/#{shared_path}/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/#{shared_path}/config"]
-
   queue! %[touch "#{deploy_to}/#{shared_path}/config/database.yml"]
   queue! %[touch "#{deploy_to}/#{shared_path}/config/secrets.yml"]
   queue  %[echo "-----> Be sure to edit '#{deploy_to}/#{shared_path}/config/database.yml' and 'secrets.yml'."]
-
   queue %[
     repo_host=`echo $repo | sed -e 's/.*@//g' -e 's/:.*//g'` &&
     repo_port=`echo $repo | grep -o ':[0-9]*' | sed -e 's/://g'` &&
