@@ -30,3 +30,7 @@ namespace :db do
     Rake::Task['db:version'].execute
   end
 end
+
+task :deploy do
+  system('mina deploy')
+end
