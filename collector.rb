@@ -5,6 +5,7 @@ require_relative './init/models'
 class Collector
 
   def run
+    source = 'http://www.ticketpro.by'
     current_page = source + '/jnp/music/index.html'
     while (current_page != source) do
       html = get_html(current_page)
@@ -20,8 +21,12 @@ class Collector
     end
   end
 
+  private
+
   def get_html(url)
     Nokogiri::HTML(Curl.get(url).body)
   end
 
 end
+
+Collector.new.run
