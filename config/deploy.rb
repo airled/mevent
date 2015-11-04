@@ -46,5 +46,6 @@ task :deploy => :environment do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
     end
+    queue 'bundle exec rake db:migrate'
   end
 end
