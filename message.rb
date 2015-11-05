@@ -44,5 +44,4 @@ class Message
     Nokogiri::HTML(Curl.get(url).body)
   end
 
-
 end #class

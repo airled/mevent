@@ -31,6 +31,12 @@ namespace :db do
   end
 end
 
-task :deploy do
-  system('mina deploy')
+namespace :app do
+  task :run do
+    system('bundle exec thin -p 3002 start')
+  end
+
+  task :deploy do
+    system('bindle exec mina deploy')
+  end
 end
