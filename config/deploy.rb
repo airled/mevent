@@ -45,3 +45,13 @@ task :deploy => :environment do
     queue 'bundle exec rake db:migrate'
   end
 end
+
+namespace :app do
+  task :run => :environment do
+    queue 'bundle exec rake app:run'
+  end
+  
+  task :stop => :environment do
+    queue 'bundle exec rake app:stop'
+  end
+end

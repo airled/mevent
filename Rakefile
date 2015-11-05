@@ -33,10 +33,16 @@ end
 
 namespace :app do
   task :run do
-    system('bundle exec thin -p 3002 start')
+    system('bundle exec thin -C config/thin.yml start')
+  end
+
+  task :stop do
+    pid = File.open('./tmp/pids/thin.3002.pid') { |file| file.read }
+    system("kill #{pid}")
+    puts "Thin (pid #{pid}) stopped"
   end
 
   task :deploy do
-    system('bindle exec mina deploy')
+    system('bundle exec mina deploy')
   end
 end
