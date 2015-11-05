@@ -45,8 +45,8 @@ namespace :app do
       puts 'Could not find pidfile. Check if the server is running'
     end
   end
+end
 
-  task :deploy do
-    system('bundle exec mina full_deploy')
-  end
+task :deploy do
+  system('bundle exec mina full_deploy')
 end
