@@ -37,9 +37,13 @@ namespace :app do
   end
 
   task :stop do
-    pid = File.open('./tmp/pids/thin.3002.pid') { |file| file.read }
-    system("kill #{pid}")
-    puts "Thin (pid #{pid}) stopped"
+    if File.exist?('./tmp/pids/thin.3002.pid')
+      pid = File.open('./tmp/pids/thin.3002.pid') { |file| file.read }
+      system("kill #{pid}")
+      puts "Thin (pid #{pid}) stopped"
+    else
+      puts 'Could not find pidfile. Check if the server is running'
+    end
   end
 
   task :deploy do
