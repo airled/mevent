@@ -48,10 +48,16 @@ end
 
 namespace :app do
   task :run => :environment do
-    queue 'bundle exec rake app:run'
+    queue 'cd current && bundle exec rake app:run'
   end
-  
+
   task :stop => :environment do
-    queue 'bundle exec rake app:stop'
+    queue 'cd current && bundle exec rake app:stop'
   end
+end
+
+task :full_deploy => :environment do
+  invoke :'app:stop'
+  invoke :deploy
+  invoke :'app:run'
 end

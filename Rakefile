@@ -43,6 +43,6 @@ namespace :app do
   end
 
   task :deploy do
-    system('bundle exec mina deploy')
+    system('bundle exec mina full_deploy')
   end
 end
