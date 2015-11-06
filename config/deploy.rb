@@ -48,7 +48,7 @@ end
 
 namespace :app do
   task :start => :environment do
-    queue 'cd current && bundle exec rake app:run'
+    queue 'cd current && bundle exec rake app:start'
   end
 
   task :stop => :environment do
