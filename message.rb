@@ -6,8 +6,9 @@ class Message
   attr_accessor :text, :number
 
   def send
-    html = get_html('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send&isFree=1').text
-    # captcha_url = "http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_show_antispam_image&ImageNumber=#{captcha_num}"
+    html = get_html('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send&isFree=1')
+
+    captcha_url = 'http://freesms.mts.by/cgi-bin/' + html.xpath('//td/img/@src').text
     count = @text.size
     time = Time.now
     day = time.day.to_s
