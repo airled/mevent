@@ -2,6 +2,7 @@ require_relative './init/db'
 Sequel.extension :migration
 
 namespace :db do
+
   desc "Prints current schema version"
   task :version do
     version = if DB.tables.include?(:schema_info)
@@ -29,20 +30,25 @@ namespace :db do
     Sequel::Migrator.run(DB, "db/migrate")
     Rake::Task['db:version'].execute
   end
+  
 end
 
 namespace :app do
+
   task :start do
     system('bundle exec thin -C config/thin.yml start')
   end
 
   task :stop do
-    servers = Dir.glob('./tmp/pids/*').select { |filename| filename.include?('thin') }
-    puts 'Could not find pidfile(s). Check if the server is running' if servers.empty?
-    servers.map do |server|
-      pid = File.open("./#{server}") { |file| file.read }
-      system("kill #{pid}")
-      puts "Thin (pid #{pid}) stopped"
+    servers = Dir.glob('./tmp/pids/thin*')
+    if servers.empty?
+      puts 'Could not find pidfile(s). Check if the server is running'
+    else
+      servers.map do |server|
+        pid = File.open("./#{server}") { |file| file.read }
+        system("kill #{pid}")
+        puts "Thin (pid #{pid}) stopped"
+      end
     end
   end
 
