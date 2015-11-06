@@ -32,7 +32,7 @@ namespace :db do
 end
 
 namespace :app do
-  task :run do
+  task :start do
     system('bundle exec thin -C config/thin.yml start')
   end
 
