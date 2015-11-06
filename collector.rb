@@ -12,8 +12,8 @@ class Collector
       p current_page
       html.xpath('//div[@class="eventInfo"]').map do |event|
         name = event.xpath('.//h3').text.strip
-        place = event.xpath('.//p[1]').text.strip
-        date = event.xpath('.//p[2]').text.strip
+        place = event.xpath('.//span[@class="fn org"]').text.strip
+        date = event.xpath('.//p[@class="date"]').text.strip
         pic_url = source + event.xpath('../div[@class="eventImage"]/div[@class="eventPoster"]/a/img/@src').text.strip
         Concert.create(name: name, place: place, date: date, pic_url: pic_url)
       end
