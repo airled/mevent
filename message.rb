@@ -9,7 +9,6 @@ class Message
     html = get_html('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send&isFree=1')
 
     captcha_url = 'http://freesms.mts.by/cgi-bin/' + html.xpath('//td/img/@src').text
-    count = @text.size
     time = Time.now
     day = time.day.to_s
     mon = time.mon.to_s
@@ -28,7 +27,7 @@ class Message
         'NDC' => '29',
         'mobnum' => @number,
         'Msg' => @text,
-        'count' => count,
+        'count' => @text.size,
         'Day' => day,
         'Mon' => mon,
         'Year' => year,
