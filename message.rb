@@ -7,7 +7,6 @@ class Message
 
   def send
     html = get_html('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send&isFree=1')
-
     captcha_url = 'http://freesms.mts.by/cgi-bin/' + html.xpath('//td/img/@src').text
     time = Time.now
     day = time.day.to_s
@@ -16,7 +15,6 @@ class Message
     hour = time.hour.to_s
     min = time.min
     table_record_id = html.xpath('//td[@class="number"]/input[@type="hidden"]/@value').text
-
     Curl.post('http://freesms.mts.by/cgi-bin/cgi.exe?function=sms_send', 
       {
         'MMObjectType' => '0',
@@ -35,7 +33,8 @@ class Message
         'Min' => min,
         'antispamText' => '3180', #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         'textTableRecordId' => table_record_id
-      })
+      }
+    )
   end #send
 
   private

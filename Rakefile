@@ -57,3 +57,8 @@ end
 task :deploy do
   system('bundle exec mina full_deploy')
 end
+
+task :collect do
+  require_relative './collector'
+  Collector.new.run
+end

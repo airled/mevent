@@ -7,7 +7,7 @@ class Collector
   def run
     source = 'http://www.ticketpro.by'
     current_page = source + '/jnp/music/index.html'
-    while (current_page != source) do
+    while (current_page != source)
       html = get_html(current_page)
       p current_page
       html.xpath('//div[@class="eventInfo"]').map do |event|
@@ -28,5 +28,3 @@ class Collector
   end
 
 end
-
-Collector.new.run
